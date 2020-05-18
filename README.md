@@ -1,5 +1,13 @@
 # card-deck
 
+## May 17 EOD
+
+Can create a game, join it, and start it.
+
+Need to work on sharing game rounds and making that logic work on the backend
+
+### previous notes
+
 Ok, hitting api/games/create does make a connection to firebase and can access the api there.
 
 Created a google service account via https://console.cloud.google.com/iam-admin/serviceaccounts/create?authuser=0&project=cards-api-1c66e&supportedpurview=project
