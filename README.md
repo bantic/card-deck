@@ -1,57 +1,41 @@
 # card-deck
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+Ok, hitting api/games/create does make a connection to firebase and can access the api there.
 
-## Prerequisites
+Created a google service account via https://console.cloud.google.com/iam-admin/serviceaccounts/create?authuser=0&project=cards-api-1c66e&supportedpurview=project
+and encoded the JSON file as:
 
-You will need the following things properly installed on your computer.
+- encodeURI(JSON.stringify(certJSON))
+- stored the encoded string as FIREBASE_ADMIN_JSON
+- It is decoded in the firebase.js util
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with npm)
-* [Ember CLI](https://ember-cli.com/)
-* [Google Chrome](https://google.com/chrome/)
+* This allows the API to make changes to the FB database without needing to authenticate a specific user
+* Apparently user auth is needed only if we want to have the client modify (or query?) the FB firestore
 
-## Installation
+Firebase usage:
 
-* `git clone <repository-url>` this repository
-* `cd card-deck`
-* `npm install`
+- following https://firebase.google.com/docs/firestore/quickstart?authuser=0#node.js
 
-## Running / Development
+* the Firestore: https://console.firebase.google.com/u/0/project/cards-api-1c66e/database/firestore/data~2Fusers~2Falovelace2
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
+### Notes
 
-### Code Generators
+API endpoints:
 
-Make use of the many generators for code, try `ember help generate` for more details
+- findOrCreateGame
+  - if given a shortId, finds or creates a game with that short id
+  - if no short id, generates one and then creates the game
+- joinGame
+  - given a username and client-side-generated user id, joins the user to the game. finds or creates a player record with that username and id
+- startGame
+  - marks a game as "started" — stop accepting new players
 
-### Running Tests
+How to distribute cards to the players? Starting the game should create and shuffle a deck.
 
-* `ember test`
-* `ember test --server`
+Players should see their cards, and see the deck status, and see other players card counts.
 
-### Linting
+Players should be able to pass a card(s).
 
-* `npm run lint:hbs`
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
+Players should be able to play a card.
 
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](https://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+The game should enforce when a player can take an action, but it seems like it would be ok as a first step to allow anyone to play at any time, and enforce the rules out-of-band.

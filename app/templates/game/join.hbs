@@ -1,0 +1,16 @@
+<h1>
+  Joining Game {{this.model.shortId}}
+</h1>
+
+<h2>
+  Enter Your Name
+</h2>
+<Input @value={{this.username}} />
+
+<button
+  disabled={{unless this.username "disabled"}}
+  type="submit"
+  {{on "click" this.joinGame}}
+>
+  Join Game
+</button>

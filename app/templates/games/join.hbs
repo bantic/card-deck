@@ -1,0 +1,9 @@
+Game ID:
+<Input @value={{this.shortId}} />
+<button
+  disabled={{unless this.shortId "disabled"}}
+  type="submit"
+  {{on "click" this.joinGame}}
+>
+  Join Game
+</button>

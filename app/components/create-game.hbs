@@ -1,0 +1,18 @@
+<h1>
+  Create a New Game
+</h1>
+
+<button type="button" {{on "click" this.createGame}}>
+  Create Game
+</button>
+
+{{#if this.isCreating}}
+  ...Working...
+{{else if this.shortId}}
+  Created Game: {{this.shortId}}!
+  <LinkTo @route="games.join" @model={{this.shortId}}>
+    Join this game.
+  </LinkTo>
+{{else if this.didError}}
+  Error: {{this.didError}}
+{{/if}}

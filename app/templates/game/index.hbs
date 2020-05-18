@@ -1,0 +1,14 @@
+<h1>
+  Game {{this.model.shortId}}
+</h1>
+
+<h2>
+  Players
+</h2>
+<ul>
+  {{#each this.model.players as |player|}}
+    <li>
+      {{player.username}}
+    </li>
+  {{/each}}
+</ul>
