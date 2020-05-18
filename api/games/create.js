@@ -38,6 +38,7 @@ function createGameData(shortId) {
   return {
     shortId,
     uuid: uuidv4(),
+    started: false,
     players: [],
   };
 }

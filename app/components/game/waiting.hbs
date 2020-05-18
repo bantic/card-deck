@@ -1,0 +1,18 @@
+<h1>
+  Game {{@game.shortId}}
+</h1>
+
+<h2>
+  Players
+</h2>
+<ul>
+  {{#each @game.players as |player|}}
+    <li>
+      {{player.username}}
+    </li>
+  {{/each}}
+</ul>
+
+<button type="submit" {{on "click" this.startGame}}>
+  Everyone's here, start game
+</button>

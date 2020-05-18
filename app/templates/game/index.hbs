@@ -1,14 +1,5 @@
-<h1>
-  Game {{this.model.shortId}}
-</h1>
-
-<h2>
-  Players
-</h2>
-<ul>
-  {{#each this.model.players as |player|}}
-    <li>
-      {{player.username}}
-    </li>
-  {{/each}}
-</ul>
+{{#if this.model.started}}
+  <Game::Play @game={{this.model}} />
+{{else}}
+  <Game::Waiting @game={{this.model}} @didStart={{this.gameDidStart}} />
+{{/if}}

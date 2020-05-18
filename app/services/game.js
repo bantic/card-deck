@@ -18,6 +18,17 @@ export default class GameService extends Service {
     }
   }
 
+  async refresh(shortId) {
+    return await this.findOrCreate(shortId);
+  }
+
+  async start(shortId) {
+    let resp = await fetch(`/api/games/${shortId}/start`, {
+      method: "POST",
+    });
+    return await resp.json();
+  }
+
   async joinGame(shortId, username) {
     let resp = await fetch(`/api/games/${shortId}/join`, {
       method: "POST",
